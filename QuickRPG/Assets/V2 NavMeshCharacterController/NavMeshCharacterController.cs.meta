@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 5bffef995eb02b74195a7216edfc8fb4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - roam_target: {instanceID: 0}
+  - interact_Target: {instanceID: 0}
+  - spawn_cloneInstance: {instanceID: 0}
+  - charLastAttackedBy: {fileID: 2723918305252475181, guid: a260ce585a1c7f7439ed1c6e2b6fc9d9,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
