@@ -16,6 +16,7 @@ public class PlayerController : CharController
     private RaycastHit hit;
 
     private Color favouriteColour;
+    private bool radiusCast;
 
     private float scrollSpeed;
     private float scrollDistanceCap;
@@ -23,17 +24,22 @@ public class PlayerController : CharController
     void Start()
     {
         //instantiate
-        camPosAdd = new Vector3(3f, 4f, -3f);
         cam = gameObject.AddComponent<Camera>();
+        camPosAdd = new Vector3(3f, 4f, -3f);
         cam.transform.position = modelObject.transform.position + camPosAdd;
         cam.transform.rotation = Quaternion.Euler(45.4646835f, 315.705444f, 0.432923496f);
+        favouriteColour = new Color(178, 172, 136);
+        radiusCast = false;
         
+        //testing
         state = STATE.MOVING;
     }
 
     void Update()
     {
+        //current regular updates are 3 per player
         UpdateCamera();
+        UpdateCurrentTile();
 
         switch (state)
         {
@@ -52,6 +58,8 @@ public class PlayerController : CharController
         }
     }
 
+    #region Regular Updates
+    //for the reggies yo
     void UpdateCamera()
     {
         //controls for camera, including movement corrections, scrolling, other techniques and limits of all tech 
@@ -65,26 +73,57 @@ public class PlayerController : CharController
         }
     }
 
+    void UpdateCurrentTile()
+    {
+        if (currentTile != null) return;
+
+        Physics.Raycast(modelObject.transform.position, Vector3.down, out hit, 1000f);
+        currentTile = hit.transform.gameObject.GetComponent<TileController>().Tile;
+    }
+    #endregion
+
     // Moving, Player highlights available options.
     void CastSelectableRadius()
     {
+
+
+        if (radiusCast) return;
+        radiusCast = true;
+
         //within a determined radius, highlight available tiles in a color set by the player,
         float radius;
         TileController tile = currentTile.TileController;
+        BaseTile[] foundTiles;
 
         //determine radius with stats by deciding action regen rate(prevents player from overexerting themselves)
         radius = stats.actionRegenRate;
+        foundTiles = tile.FindTilesInRadius(tile.transform.position, radius);
 
         Debug.Log($"found tile for selectable: {tile.name}");
         //find selected tiles in radius around current tile
-        selectableTiles = tile.FindTilesInRadius(tile.transform.position, radius);
+        selectableTiles = new BaseTile[foundTiles.Length-1];
+        selectableTiles = foundTiles;
 
-        // change colour for 
         // colour settings are set for clientside performance
-        // favouriteColour;
+        for (int i = 0; i < selectableTiles.Length; i++)
+            GameManager.manager.levelManager.SetObjectColor(
+                selectableTiles[i].TileObject.gameObject, favouriteColour);
 
         // ally, neutral and enemy movement is different colours only viewable from difficulty settings or spells,
         // this might be changed to character controller for expandability
+    }
+    void OnDrawGizmos()
+    {
+       // Gizmos.DrawWireSphere(currentTile.TileController.transform.position, stats.actionRegenRate);
+    }
+
+    void RemoveCurrentSelectableTiles() // Selectable Radius
+    {   // after moving set selectable tiles to old colour array
+        radiusCast = false;
+
+        for (int i = 0; i < selectableTiles.Length; i++)
+            GameManager.manager.levelManager.SetObjectColor(
+                selectableTiles[i].TileObject.gameObject, Color.white);
     }
     void MovePlayer() 
         
@@ -92,7 +131,7 @@ public class PlayerController : CharController
         // maybe should be consolidated to a seperate class file that can be plugged into the controller
         // could lead to all facets being pluggable features?
     {
-        //CastSelectableRadius();<<<<<<<<<<<<<<<<<<<<<<<<<<<<<***!!!!
+        CastSelectableRadius();
 
         if (Input.GetMouseButtonDown(0)) 
         {
@@ -109,6 +148,7 @@ public class PlayerController : CharController
                     currentTile = tileController.Tile;
                       
                     Move(finPOS);
+                    RemoveCurrentSelectableTiles();
                 }
             }
         }

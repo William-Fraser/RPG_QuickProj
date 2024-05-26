@@ -17,6 +17,8 @@ public class UIManager : MonoBehaviour
     public Canvas options;
     public Canvas credits;
 
+
+    #region Menu Buttons
     public void DisableAll()
     {
         titleMenu.enabled = false;
@@ -60,6 +62,7 @@ public class UIManager : MonoBehaviour
         DisableAll();
         gamePlay.enabled = true;
     }
+
     public void LoadGameEnd()
     {
         gameEndMenu.enabled = true;
@@ -90,6 +93,7 @@ public class UIManager : MonoBehaviour
     {
         credits.enabled = true;
     }
+    #endregion
 }
 
 

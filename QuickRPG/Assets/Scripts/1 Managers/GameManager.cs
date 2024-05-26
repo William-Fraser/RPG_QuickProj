@@ -19,6 +19,7 @@ public enum GameState
     MATCHMAKING,
     GAMESETUP,
     GAMEPLAY,
+    DEMO,
     GAMEEND,
     SAVE,
     LOAD,
@@ -72,7 +73,6 @@ public class GameManager : MonoBehaviour
         //load options
         Load(0);
     }
-    private bool finishchange;
     private void Update()
     {
         ControlPauseGame();
@@ -82,16 +82,13 @@ public class GameManager : MonoBehaviour
             case GameState.MAINMENU:
                 {
                     ChangeScene(GameState.MAINMENU.ToString()); // find scenes better somehow
-
                     uiManager.LoadTitleMenu(); // menus handled by UI and LevelManagers button controls
 
-                    finishchange = false;
                     return;
                 }
             case GameState.CONNECTSERVER:
                 {
                     ChangeScene(GameState.CONNECTSERVER.ToString());
-
                     uiManager.LoadConnectServer(); // menus handled by UI and LevelManagers button controls
 
                     return;
@@ -99,9 +96,7 @@ public class GameManager : MonoBehaviour
             case GameState.MATCHMAKING:
                 {
                     ChangeScene(GameState.MATCHMAKING.ToString());
-
                     levelManager.EnterKeyRoomControl();
-
                     uiManager.LoadMatchmaking(); // menus handled by UI and LevelManagers button controls
 
                     return;
@@ -121,25 +116,14 @@ public class GameManager : MonoBehaviour
             case GameState.GAMEPLAY:
                 {
                     ChangeScene(GameState.GAMEPLAY.ToString());
-
                     uiManager.LoadGameplay();
 
-                    if (finishchange)
-                    {
-                        /*//start world
-                        if (levelManager.ActiveGameWorld.ReadyToStart)
-                        {
-                            levelManager.ActiveGameWorld.StartWorld(levelManager.SetupController);
-
-                        }
-
-                        //go to next turn
-                        if (levelManager.ActiveGameWorld.CurrentPlayersTurn == false)
-                        {
-                            levelManager.StartNextTurn();
-                        }*/
-                    }
-                    if (!finishchange) finishchange = true;
+                    return;
+                }
+            case GameState.DEMO:
+                {
+                    uiManager.LoadGameplay();
+                    ChangeScene(GameState.DEMO.ToString());
 
                     return;
                 }
@@ -207,6 +191,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void ChangeScene(int index, LoadSceneMode sceneMode = LoadSceneMode.Single)
+    {
+        if (SceneManager.GetActiveScene() != SceneManager.GetSceneAt(index))
+        {
+            SceneManager.LoadScene(index, sceneMode);
+        }
+    }
+
     public void StopTime()
     {
         if (Time.timeScale == 1) { Time.timeScale = 0; }
@@ -251,7 +243,7 @@ public class GameManager : MonoBehaviour
         bf.Serialize(file, savedInfo);
         file.Close();
 
-        levelManager.enableSaveLoadText(GameState.SAVE); // method only used here, Gamestate id is for conveniences
+        levelManager.EnableSaveLoadText(GameState.SAVE); // method only used here, Gamestate id is for conveniences
     }
 
     public void Load(int path)
@@ -276,7 +268,7 @@ public class GameManager : MonoBehaviour
             gameState = loadedInfo.gameState;
         }
 
-        levelManager.enableSaveLoadText(GameState.LOAD); 
+        levelManager.EnableSaveLoadText(GameState.LOAD); 
     }
 
     public void ResetScene()

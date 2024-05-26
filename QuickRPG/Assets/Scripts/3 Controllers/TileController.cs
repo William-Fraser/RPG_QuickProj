@@ -6,8 +6,6 @@ public enum TILETYPE
     BASE
 }
 
-
-
 public class TileController : MonoBehaviour
 {
     [Header("Tile Objects")]
@@ -56,9 +54,25 @@ public class TileController : MonoBehaviour
     //tile related function
     public BaseTile[] FindTilesInRadius(Vector3 centre, float radius)
     {
+        RaycastHit[] hits = new RaycastHit[0];
+        GameObject[] objects = new GameObject[0];
         BaseTile[] tiles = new BaseTile[0];
 
         //spherecast in a radius around centre, and grab tiles to return
+        hits = Physics.SphereCastAll(centre, radius, Vector3.down, 3);
+        Debug.Log($"# of hits {hits.Length}, r {radius}");
+
+        objects = new GameObject[hits.Length];
+        tiles = new BaseTile[hits.Length];
+
+        for (int i = 0; i < hits.Length; i++)
+        {
+            objects[i] = hits[i].collider.gameObject;
+            Debug.Log($"Hit {hits[i].collider.gameObject.name}");
+
+            if (objects[i].tag == "Tile")
+            tiles[i] = objects[i].GetComponent<TileController>().Tile;
+        }
 
         return tiles;
     }
@@ -70,7 +84,6 @@ public class TileController : MonoBehaviour
         Tile = tile_;
     }
 }
-
 
 #region TileSet
 /// <tilesNeeded>

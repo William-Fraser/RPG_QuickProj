@@ -98,10 +98,10 @@ public class LevelManager : MonoBehaviour
         Debug.LogWarning($"networking client server: <{PhotonNetwork.NetworkingClient.Server}>, isready: <{PhotonNetwork.IsConnectedAndReady}>");
 
         if (fadeSave || fadeLoad)
-        { fadeSaveLoadText(); }
+        { FadeSaveLoadText(); }
     }
 
-    #region UIControl
+    #region UI Menu Control
 
     //buttons
     public void ChangeGameStateToMainMenu()
@@ -142,6 +142,11 @@ public class LevelManager : MonoBehaviour
     public void ChangeGameStateToGamePlay()
     {
         GameManager.manager.ChangeState(GameState.GAMEPLAY);
+    }
+
+    public void ChangeGameStateToDemo()
+    {
+        GameManager.manager.ChangeState(GameState.DEMO);
     }
 
     public void ChangeGameStateToGameEnd()
@@ -187,14 +192,15 @@ public class LevelManager : MonoBehaviour
     {
         GameManager.manager.ChangeState(GameState.CREDITS);
     }
+    #endregion
 
-    //feedback
-    public void enableSaveLoadText(GameState saveOrLoad)
+    #region UI Feedback
+    public void EnableSaveLoadText(GameState saveOrLoad)
     {
         if (saveOrLoad == GameState.SAVE)
         {
             saveText.CrossFadeAlpha(1, .1f, true);
-            StartCoroutine(WaitToFadeText(GameState.SAVE));
+            StartCoroutine(WaitToFadeText(GameState.SAVE)); // crossfade alpha like in fadeSaveLoad
         }
         else if (saveOrLoad == GameState.LOAD)
         {
@@ -203,7 +209,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public void fadeSaveLoadText()
+    public void FadeSaveLoadText()
     {
         if (fadeSave)
         {
@@ -236,37 +242,16 @@ public class LevelManager : MonoBehaviour
         popUp.SetUp(message, color, checkProximity, disableWhenClose, proxDistance, proxTarget, scrolling);
     }
 
-    //misc commands
-    public void Save(int path)
-    {
-        GameManager.manager.Save(path);
-    }
-
-    public void Load(int path)
-    {
-        GameManager.manager.Load(path);
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
-
-    public void ScrollCredits()
-    { 
-        //if (GameManager.manager.gameState)
-    }
-
     public void EnableButtonIfFileExists(Button button)
     {
         foreach (string letter in button.name.Split())
         {
             if (int.TryParse(letter, out int result))
-            { 
+            {
                 if (GameManager.manager.CheckRoute(result))
-                { 
+                {
                     button.interactable = true;
-                } 
+                }
             }
         }
     }
@@ -298,6 +283,71 @@ public class LevelManager : MonoBehaviour
             }
         }
     }
+    #endregion
+
+    #region Misc. Commands
+    public void Save(int path)
+    {
+        GameManager.manager.Save(path);
+    }
+
+    public void Load(int path)
+    {
+        GameManager.manager.Load(path);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void ScrollCredits()
+    { 
+        //if (GameManager.manager.gameState)
+    }
+
+    public void SetObjectColor(GameObject gameObject, Color color)
+    { 
+        gameObject.GetComponent<MeshRenderer>().material.color = color;
+    }
+    #endregion
+
+    #region Online methods
+    public void CreateRegionDex()
+    {
+        regionDex = new Dictionary<Region, string>();
+
+        regionDex.Add(Region.CENTRAL_ASIA, "ASIA");
+        regionDex.Add(Region.AUSTRALIA, "AU");
+        regionDex.Add(Region.CANADA_EAST, "CAE");
+        regionDex.Add(Region.EUROPE, "EU");
+        regionDex.Add(Region.SOUTHAMERICA, "SA");
+        regionDex.Add(Region.US_WEST, "USW");
+    }
+
+    public void CreateRoom()
+    {
+        PhotonNetwork.CreateRoom(hostInput.text);
+        tempHostbool = true;
+    }
+
+    public void JoinRoom()
+    {
+        PhotonNetwork.JoinRoom(joinInput.text);
+        tempHostbool = false;
+    }
+
+    public void EnterKeyRoomControl()
+    {
+        if (joinInput.text.Length > 0 && hostInput.text.Length > 0) return;
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            if (joinInput.text.Length > 0) JoinRoom();
+
+            if (hostInput.text.Length > 0) CreateRoom();
+        }
+    }
 
     public GameObject InstantiateFromConnectionType(GameObject instancedObject, Vector3 position)
     {
@@ -309,12 +359,11 @@ public class LevelManager : MonoBehaviour
         }
         else //instatiate like normal
         {
-            inst= Instantiate(instancedObject, position, Quaternion.identity);
+            inst = Instantiate(instancedObject, position, Quaternion.identity);
         }
 
         return inst;
     }
-
 
     //game setup
     /*public void UpdateSetupHUD()
@@ -361,46 +410,6 @@ public class LevelManager : MonoBehaviour
     }*/
     #endregion
 
-    //Online methods
-    public void CreateRegionDex()
-    {
-        regionDex = new Dictionary<Region, string>();
-
-        regionDex.Add(Region.CENTRAL_ASIA, "ASIA");
-        regionDex.Add(Region.AUSTRALIA, "AU");
-        regionDex.Add(Region.CANADA_EAST, "CAE");
-        regionDex.Add(Region.EUROPE, "EU");
-        regionDex.Add(Region.SOUTHAMERICA, "SA");
-        regionDex.Add(Region.US_WEST, "USW");
-    }
-    public void CreateRoom()
-    {
-        PhotonNetwork.CreateRoom(hostInput.text);
-        tempHostbool = true;
-    }
-
-    public void JoinRoom()
-    {
-        PhotonNetwork.JoinRoom(joinInput.text);
-        tempHostbool = false;
-    }
-
-    public void EnterKeyRoomControl()
-    {
-        if (joinInput.text.Length > 0 && hostInput.text.Length > 0) return;
-
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            if (joinInput.text.Length > 0) JoinRoom();
-
-            if (hostInput.text.Length > 0) CreateRoom();
-        }
-    }
-
-    public void UpdateUIText(TextMeshProUGUI UI, string updateText)
-    {
-        UI.text = updateText;
-    }
     #region Options
     public float GetBrightnessSliderValue()
     {
@@ -420,6 +429,7 @@ public class LevelManager : MonoBehaviour
     }
     #endregion
 
+    //IEnum
     IEnumerator WaitToFadeText(GameState fade)
     {
         yield return new WaitForSeconds(textFadeWaitTime);

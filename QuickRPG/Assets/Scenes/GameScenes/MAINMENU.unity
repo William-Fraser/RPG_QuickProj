@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &134960146 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5634331095209338376, guid: aee3036a422d00b4baf5b8a03c77d84e, type: 3}
+  m_PrefabInstance: {fileID: 28725976765210465}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf906a05fcf9e7e4ca00b84013950af4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1061537203
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,6 +591,46 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2772367624112235914, guid: aee3036a422d00b4baf5b8a03c77d84e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3199133006446085724, guid: aee3036a422d00b4baf5b8a03c77d84e, type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3199133006874909208, guid: aee3036a422d00b4baf5b8a03c77d84e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3199133008166101748, guid: aee3036a422d00b4baf5b8a03c77d84e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3199133008429561196, guid: aee3036a422d00b4baf5b8a03c77d84e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 3199133008429561196, guid: aee3036a422d00b4baf5b8a03c77d84e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3199133008429561196, guid: aee3036a422d00b4baf5b8a03c77d84e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -761.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3199133008429561196, guid: aee3036a422d00b4baf5b8a03c77d84e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -50.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3199133008429561199, guid: aee3036a422d00b4baf5b8a03c77d84e, type: 3}
+      propertyPath: m_Name
+      value: ButtonV2 SecretTestDemoButton for DevsOnly
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312408987007116554, guid: aee3036a422d00b4baf5b8a03c77d84e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3495147446115868075, guid: aee3036a422d00b4baf5b8a03c77d84e, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -639,6 +690,22 @@ PrefabInstance:
     - target: {fileID: 5082579597870778442, guid: aee3036a422d00b4baf5b8a03c77d84e, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6213329047914239992, guid: aee3036a422d00b4baf5b8a03c77d84e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6213329047914239992, guid: aee3036a422d00b4baf5b8a03c77d84e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 134960146}
+    - target: {fileID: 6213329047914239992, guid: aee3036a422d00b4baf5b8a03c77d84e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeGameStateToDemo
+      objectReference: {fileID: 0}
+    - target: {fileID: 6213329047914239992, guid: aee3036a422d00b4baf5b8a03c77d84e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LevelManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6579639165095023074, guid: aee3036a422d00b4baf5b8a03c77d84e, type: 3}
       propertyPath: m_AnchorMax.x
@@ -779,6 +846,10 @@ PrefabInstance:
     - target: {fileID: 8368104952116405642, guid: aee3036a422d00b4baf5b8a03c77d84e, type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883436613928429698, guid: aee3036a422d00b4baf5b8a03c77d84e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9180752730710395115, guid: aee3036a422d00b4baf5b8a03c77d84e, type: 3}
       propertyPath: m_AnchorMax.y
