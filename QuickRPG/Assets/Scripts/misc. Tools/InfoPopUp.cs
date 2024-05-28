@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class InfoPopUp : MonoBehaviour
 {
-    public Text displayedTxt;
+    public Text displayedText;
 
     // private
     private Color textColour;
@@ -22,20 +22,20 @@ public class InfoPopUp : MonoBehaviour
 
     public void SetUp(string message, Color color)
     {
-        displayedTxt = GetComponentInChildren<Text>();
+        displayedText = GetComponentInChildren<Text>();
+        displayedText.text = message;
+        displayedText.color = textColour;
         textColour = color;
-        displayedTxt.text = message;
-        displayedTxt.color = textColour;
         scrolling = true;
     }
 
     //overloaded statoinary 
     public void SetUp(string message, Color color, bool checkProximity, bool disableWhenClose, float proxDistance, Transform proxTarget, bool scrolling)
     {
-        displayedTxt = GetComponent<Text>();
+        displayedText = GetComponent<Text>();
         textColour = color;
-        displayedTxt.text = message;
-        displayedTxt.color = textColour;
+        displayedText.text = message;
+        displayedText.color = textColour;
         this.checkProximity = checkProximity;
         checkOutsideProx = disableWhenClose;
         this.proxDistance = proxDistance;
@@ -77,7 +77,7 @@ public class InfoPopUp : MonoBehaviour
             if (fadeWaitTime <= 0) // time left to be alive expires
             {
                 textColour.a -= fadeSpeed * Time.deltaTime;
-                displayedTxt.color = textColour;
+                displayedText.color = textColour;
 
                 if (textColour.a <= 0) // visibility is gone
                 {

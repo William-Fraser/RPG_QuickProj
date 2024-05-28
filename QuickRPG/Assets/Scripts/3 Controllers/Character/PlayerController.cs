@@ -25,6 +25,7 @@ public class PlayerController : CharController
     {
         //instantiate
         cam = gameObject.AddComponent<Camera>();
+        cam.main
         camPosAdd = new Vector3(3f, 4f, -3f);
         cam.transform.position = modelObject.transform.position + camPosAdd;
         cam.transform.rotation = Quaternion.Euler(45.4646835f, 315.705444f, 0.432923496f);
@@ -85,8 +86,6 @@ public class PlayerController : CharController
     // Moving, Player highlights available options.
     void CastSelectableRadius()
     {
-
-
         if (radiusCast) return;
         radiusCast = true;
 
@@ -101,11 +100,16 @@ public class PlayerController : CharController
 
         Debug.Log($"found tile for selectable: {tile.name}");
         //find selected tiles in radius around current tile
-        selectableTiles = new BaseTile[foundTiles.Length-1];
+        selectableTiles = new BaseTile[foundTiles.Length];
         selectableTiles = foundTiles;
 
+        Vector3 heightXZ = modelObject.transform.position;
+        Vector3 height = new Vector3(heightXZ.x, modelObject.GetComponent<MeshRenderer>().bounds.size.y, heightXZ.z);
+        GameManager.manager.levelManager.CreatePopUp("OKAY", height, favouriteColour);
+        
+        
         // colour settings are set for clientside performance
-        for (int i = 0; i < selectableTiles.Length; i++)
+        for (int i = 0; i < selectableTiles.Length-1; i++)
             GameManager.manager.levelManager.SetObjectColor(
                 selectableTiles[i].TileObject.gameObject, favouriteColour);
 
@@ -114,7 +118,7 @@ public class PlayerController : CharController
     }
     void OnDrawGizmos()
     {
-       // Gizmos.DrawWireSphere(currentTile.TileController.transform.position, stats.actionRegenRate);
+        Gizmos.DrawWireSphere(currentTile.TileController.transform.position, stats.actionRegenRate);
     }
 
     void RemoveCurrentSelectableTiles() // Selectable Radius

@@ -1310,7 +1310,7 @@ MonoBehaviour:
   brightnessSlider: {fileID: 2054751975906273037}
   saveText: {fileID: 5206371428729183995}
   loadText: {fileID: 6395842858807151611}
-  prefab_InfoPopup: {fileID: 7842702970101110197, guid: 3433f96f2d1e6cd4f899de241aee3988, type: 3}
+  prefab_InfoPopup: {fileID: 7842702970101110197, guid: 00e9483090fbc574eb853cd8b75127a7, type: 3}
   prefab_SetupController: {fileID: 2485459070497797042, guid: 8f096eb89fad9e543bbceb28b46ab202, type: 3}
   stateButtonGroup: {fileID: 1109160788158094848}
   mapSize: {fileID: 12336352311593579}
