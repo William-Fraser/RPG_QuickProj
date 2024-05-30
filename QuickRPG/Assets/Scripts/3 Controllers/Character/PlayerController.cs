@@ -21,11 +21,13 @@ public class PlayerController : CharController
     private float scrollSpeed;
     private float scrollDistanceCap;
 
+    bool freeMove; //debug
+
     void Start()
     {
         //instantiate
         cam = gameObject.AddComponent<Camera>();
-        cam.main
+        cam.gameObject.tag = "MainCamera";
         camPosAdd = new Vector3(3f, 4f, -3f);
         cam.transform.position = modelObject.transform.position + camPosAdd;
         cam.transform.rotation = Quaternion.Euler(45.4646835f, 315.705444f, 0.432923496f);
@@ -34,6 +36,7 @@ public class PlayerController : CharController
         
         //testing
         state = STATE.MOVING;
+        freeMove = false;
     }
 
     void Update()
@@ -106,12 +109,17 @@ public class PlayerController : CharController
         Vector3 heightXZ = modelObject.transform.position;
         Vector3 height = new Vector3(heightXZ.x, modelObject.GetComponent<MeshRenderer>().bounds.size.y, heightXZ.z);
         GameManager.manager.levelManager.CreatePopUp("OKAY", height, favouriteColour);
-        
-        
+
         // colour settings are set for clientside performance
-        for (int i = 0; i < selectableTiles.Length-1; i++)
+
+        //CHECK TIlES BEING SELECTED, Numbers are off not all are colouring
+        for (int i = 0; i < selectableTiles.Length - 1; i++)
+        {
+            Debug.Log($"i {i}"); 
+            Debug.Log($"ST {selectableTiles[i].TileObject.gameObject.name}");
             GameManager.manager.levelManager.SetObjectColor(
                 selectableTiles[i].TileObject.gameObject, favouriteColour);
+        }
 
         // ally, neutral and enemy movement is different colours only viewable from difficulty settings or spells,
         // this might be changed to character controller for expandability
@@ -135,24 +143,58 @@ public class PlayerController : CharController
         // maybe should be consolidated to a seperate class file that can be plugged into the controller
         // could lead to all facets being pluggable features?
     {
-        CastSelectableRadius();
 
-        if (Input.GetMouseButtonDown(0)) 
+        //debug
+        if (Input.GetMouseButtonDown(1))
         {
-            Vector3 finPOS;
-            TileController tileController;
-            
-            ray = cam.ScreenPointToRay(Input.mousePosition);
-            // ignore characters in movemode
-            if (Physics.Raycast(ray, out hit))
+            freeMove =! freeMove;
+        }
+
+        ///AdventureMovement
+        if (freeMove)
+        { 
+            if (Input.GetMouseButton(0))
             {
-                if (hit.transform.TryGetComponent(out tileController))
+                Vector3 finPOS;
+                TileController tileController;
+
+                ray = cam.ScreenPointToRay(Input.mousePosition);
+                // ignore characters in movemode
+                if (Physics.Raycast(ray, out hit))
                 {
-                    finPOS = tileController.Tile.StandingPos;
-                    currentTile = tileController.Tile;
+                    if (hit.transform.TryGetComponent(out tileController))
+                    {
+                        finPOS = tileController.Tile.StandingPos;
+                        currentTile = tileController.Tile;
+
+                        Move(finPOS);
+                        RemoveCurrentSelectableTiles();
+                    }
+                }
+            }
+        }
+        ///SituationalMovement
+        else
+        { 
+            CastSelectableRadius();
+
+            if (Input.GetMouseButtonDown(0)) 
+            {
+                Vector3 finPOS;
+                TileController tileController;
+            
+                ray = cam.ScreenPointToRay(Input.mousePosition);
+                // ignore characters in movemode
+                if (Physics.Raycast(ray, out hit))
+                {
+                    if (hit.transform.TryGetComponent(out tileController))
+                    {
+                        finPOS = tileController.Tile.StandingPos;
+                        currentTile = tileController.Tile;
                       
-                    Move(finPOS);
-                    RemoveCurrentSelectableTiles();
+                        Move(finPOS);
+                        RemoveCurrentSelectableTiles();
+                    }
                 }
             }
         }
