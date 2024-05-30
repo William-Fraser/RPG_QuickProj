@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 772.8
   m_ShowMode: 4
-  m_Title: Console
+  m_Title: Game
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -43,8 +43,8 @@ MonoBehaviour:
     y: 0
     width: 316
     height: 444
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 250
+  controlID: 51
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: NavMeshEditorWindow
+  m_Name: InspectorWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -94,14 +94,14 @@ MonoBehaviour:
     y: 0
     width: 281.59998
     height: 722.8
-  m_MinSize: {x: 300, y: 360}
+  m_MinSize: {x: 275, y: 50}
   m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 12}
+  m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
   - {fileID: 12}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 260
+  controlID: 52
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 218
+  controlID: 20
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -539,8 +539,8 @@ MonoBehaviour:
       containerId: overlay-container--right
       floating: 0
       collapsed: 0
-      displayed: 1
-      snapOffset: {x: 0, y: 0}
+      displayed: 0
+      snapOffset: {x: 0, y: 24.8}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: Scene View/Navmesh Display
@@ -671,13 +671,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.27976146, y: -0.3597782, z: 0.11401706, w: 0.882777}
+    m_Target: {x: 0.36543447, y: -0.36153618, z: 0.1566611, w: 0.84333235}
     speed: 2
-    m_Value: {x: 0.2797612, y: -0.35977784, z: 0.11401695, w: 0.88277614}
+    m_Value: {x: 0.36543393, y: -0.36153567, z: 0.15666087, w: 0.84333116}
   m_Size:
-    m_Target: 4.0580177
+    m_Target: 3.0598009
     speed: 2
-    m_Value: 4.0580177
+    m_Value: 3.0598009
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -743,22 +743,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes/Testing
+    - Assets/Prefabs/Test Objects
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 71
   m_LastFolders:
-  - Assets/Scenes/Testing
+  - Assets/Prefabs/Test Objects
   m_LastFoldersGridSize: 71
   m_LastProjectPath: C:\Users\jumpy\GD\GameDev - Unity bin\RPG_QuickProj\QuickRPG
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: ccd30000
-    m_LastClickedID: 54220
-    m_ExpandedIDs: 00000000325b0000385b00003a5b00003c5b000000ca9a3bffffff7f
+    m_SelectedIDs: eed10000
+    m_LastClickedID: 53742
+    m_ExpandedIDs: 000000007e720000bad10000bcd1000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -786,7 +786,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000325b000000ca9a3bffffff7f
+    m_ExpandedIDs: 000000007e720000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -811,8 +811,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: d2d30000
-    m_LastClickedInstanceID: 54226
+    m_SelectedInstanceIDs: 222f0000
+    m_LastClickedInstanceID: 12066
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
@@ -916,7 +916,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: f8abfeffaeb4feff32c7feff6cd0feff0079ffffb88dffff5a91ffffde98ffff8ea2ffff40a4ffff4cadffff54b7ffff50b8ffff30baffff2cbbffff60c1ffff5cc2ffffeed0ffff9cd8ffff98d9ffffc2dcffffbeddffff12e0ffff0ee1fffffeeffffffaf0ffffb2f8ffff86fafffff4ffffffdcb1000038d400005ca20100
+      m_ExpandedIDs: ccc3ffffb6f1ffff6cfaffff086a0000c4a60000d8a90000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 

@@ -62,6 +62,12 @@ public class PlayerController : CharController
         }
     }
 
+    void OnDrawGizmos()
+    {
+        if (!freeMove) Gizmos.DrawWireSphere
+                (currentTile.TileController.transform.position, stats.actionRegenRate);
+    }
+
     #region Regular Updates
     //for the reggies yo
     void UpdateCamera()
@@ -113,7 +119,7 @@ public class PlayerController : CharController
         // colour settings are set for clientside performance
 
         //CHECK TIlES BEING SELECTED, Numbers are off not all are colouring
-        for (int i = 0; i < selectableTiles.Length - 1; i++)
+        for (int i = 0; i < selectableTiles.Length; i++)
         {
             Debug.Log($"i {i}"); 
             Debug.Log($"ST {selectableTiles[i].TileObject.gameObject.name}");
@@ -124,10 +130,6 @@ public class PlayerController : CharController
         // ally, neutral and enemy movement is different colours only viewable from difficulty settings or spells,
         // this might be changed to character controller for expandability
     }
-    void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(currentTile.TileController.transform.position, stats.actionRegenRate);
-    }
 
     void RemoveCurrentSelectableTiles() // Selectable Radius
     {   // after moving set selectable tiles to old colour array
@@ -137,9 +139,8 @@ public class PlayerController : CharController
             GameManager.manager.levelManager.SetObjectColor(
                 selectableTiles[i].TileObject.gameObject, Color.white);
     }
+
     void MovePlayer() 
-        
-        
         // maybe should be consolidated to a seperate class file that can be plugged into the controller
         // could lead to all facets being pluggable features?
     {
@@ -155,40 +156,32 @@ public class PlayerController : CharController
         { 
             if (Input.GetMouseButton(0))
             {
-                Vector3 finPOS;
-                TileController tileController;
-
                 ray = cam.ScreenPointToRay(Input.mousePosition);
-                // ignore characters in movemode
+
                 if (Physics.Raycast(ray, out hit))
                 {
-                    if (hit.transform.TryGetComponent(out tileController))
-                    {
-                        finPOS = tileController.Tile.StandingPos;
-                        currentTile = tileController.Tile;
-
-                        Move(finPOS);
-                        RemoveCurrentSelectableTiles();
-                    }
+                    Move(hit.transform.position);
+                    RemoveCurrentSelectableTiles();
                 }
             }
         }
         ///SituationalMovement
-        else
+        else // TurnBased
         { 
             CastSelectableRadius();
 
             if (Input.GetMouseButtonDown(0)) 
             {
-                Vector3 finPOS;
-                TileController tileController;
-            
                 ray = cam.ScreenPointToRay(Input.mousePosition);
-                // ignore characters in movemode
+                
                 if (Physics.Raycast(ray, out hit))
                 {
+                    TileController tileController;
+
                     if (hit.transform.TryGetComponent(out tileController))
                     {
+                        Vector3 finPOS;
+
                         finPOS = tileController.Tile.StandingPos;
                         currentTile = tileController.Tile;
                       
