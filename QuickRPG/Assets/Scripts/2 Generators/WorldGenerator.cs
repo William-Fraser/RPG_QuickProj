@@ -19,7 +19,7 @@ public class WorldGenerator : MonoBehaviour
     }
 
     //if needed, to remove left over pieces in platform generation make a list, add non used pieces to it and delete them all at the end of generation
-
+    #region Map
     [SerializeField] private TileController controller;
 
     private int numberOfPlatforms;// this number is to count the number of platforms created in the generating process
@@ -33,6 +33,11 @@ public class WorldGenerator : MonoBehaviour
     public int amountOfBridges;
     public int minSizeOfBridges;
     public int maxSizeOfBridges;
+    #endregion
+
+    #region Characters
+
+    #endregion
 
     void Start()
     {

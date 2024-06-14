@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 using TMPro;
+using Photon.Chat.Demo;
 
 // controls general elements non-specific to this program, i.e: top-menus(static), online setup and options
 
@@ -20,6 +21,8 @@ public enum Region
 
 public class LevelManager : MonoBehaviour
 {
+    public PlayerController player;
+
     public Image rightEquipmentImage;
     public Text rightEquipmentDisplayName;
     public Image leftEquipmentImage;
@@ -101,7 +104,19 @@ public class LevelManager : MonoBehaviour
         { FadeSaveLoadText(); }
     }
 
-    #region UI Menu Control
+    #region Gameplay
+    public void SetPlayerObject(PlayerController player)
+    {
+        player.transform.parent = transform;
+        this.player = player;
+    }
+    public void SetObjectColor(GameObject gameObject, Color colour)
+    {
+        gameObject.GetComponent<MeshRenderer>().material.color = colour;
+    }
+    #endregion
+
+    #region UI Input, Buttons
 
     //buttons
     public void ChangeGameStateToMainMenu()
@@ -191,6 +206,12 @@ public class LevelManager : MonoBehaviour
     public void ChangeGameStateToCredits()
     {
         GameManager.manager.ChangeState(GameState.CREDITS);
+    }
+
+    //gamemode buttons
+    public void EndTurn()
+    { 
+        
     }
     #endregion
 
@@ -304,11 +325,6 @@ public class LevelManager : MonoBehaviour
     public void ScrollCredits()
     { 
         //if (GameManager.manager.gameState)
-    }
-
-    public void SetObjectColor(GameObject gameObject, Color color)
-    { 
-        gameObject.GetComponent<MeshRenderer>().material.color = color;
     }
     #endregion
 

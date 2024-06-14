@@ -2,19 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// controls elements specific to this program i.e: player menus(often changing), npcs and some interactive behaviours
+// controls elements specific to this program i.e:
+// player menus(often changing), npcs and some interactive behaviours
 
 public class WorldManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    //handle character spawning in Generator and utilize generated map
+    //create these things if the world is in Gameplay mode,
+    //Generated Maps could be saved
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

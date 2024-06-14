@@ -36,12 +36,13 @@ public class GameManager : MonoBehaviour
     //public var
     public LevelManager levelManager;
     public UIManager uiManager;
+    public GamemodeManager gamemodeManager;
 
     public GameState gameState;
 
     //private
     private string datapathExt = "/save.dat";
-    private string[] datapathRoute = new string[21]; // 20 file slots, 0 is for settings
+    private string[] datapathRoute = new string[2]; // 2 file slots, 0 is for settings
 
     //gets/sets
     public GameState GameState { get { return gameState; } }
@@ -73,6 +74,7 @@ public class GameManager : MonoBehaviour
         //load options
         Load(0);
     }
+
     private void Update()
     {
         ControlPauseGame();

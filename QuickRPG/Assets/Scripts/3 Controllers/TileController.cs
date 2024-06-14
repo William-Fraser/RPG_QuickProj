@@ -60,14 +60,12 @@ public class TileController : MonoBehaviour
 
         //spherecast in a radius around centre, and grab tiles to return
         hits = Physics.SphereCastAll(centre, radius, Vector3.down, 3);
-        Debug.Log($"# of hits {hits.Length}, r {radius}");
 
         objects = new GameObject[hits.Length];;
 
         for (int i = 0; i < hits.Length; i++)
         {
             objects[i] = hits[i].collider.gameObject;
-            Debug.Log($"Hit {hits[i].collider.gameObject.name}");
 
             if (objects[i].tag == "Tile")
             {
