@@ -112,4 +112,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeTileObject: {fileID: 5252644135690718758}
   basicTileObject: {fileID: 5252644135690718758}
-  UseActiveTile: 0
+  UseActiveTile: 1

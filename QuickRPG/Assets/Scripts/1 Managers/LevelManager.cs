@@ -7,7 +7,9 @@ using Photon.Pun;
 using TMPro;
 using Photon.Chat.Demo;
 
-// controls general elements non-specific to this program, i.e: top-menus(static), online setup and options
+// controls general elements non-specific to any sessions,
+// i.e: top-menus(static), online setup and options
+// and any global inventories or saved progress like unlocked world ages
 
 public enum Region
 {
@@ -20,14 +22,7 @@ public enum Region
 }
 
 public class LevelManager : MonoBehaviour
-{
-    public PlayerController player;
-
-    public Image rightEquipmentImage;
-    public Text rightEquipmentDisplayName;
-    public Image leftEquipmentImage;
-    public Text leftEquipmentDisplayName;
-
+{ 
     [HideInInspector]
     public int activeScreen;
     public Canvas creditCanvas;
@@ -55,7 +50,6 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Text loadText;
     [Space]
     [SerializeField] private GameObject prefab_InfoPopup; // used to create popUpInfo/could be a class of popup info instanced to an object instead
-    [SerializeField] private GameObject prefab_SetupController;
 
     //online
     private bool readyToJoinOnline;
@@ -65,10 +59,6 @@ public class LevelManager : MonoBehaviour
 
     [Header("Setup")]
     [SerializeField] private GameObject stateButtonGroup;
-
-    [Header("GameWorld")]
-    [SerializeField] private TextMeshProUGUI mapSize;
-    [SerializeField] private TextMeshProUGUI playersNum;
 
     private bool tempHostbool;
 
@@ -103,18 +93,6 @@ public class LevelManager : MonoBehaviour
         if (fadeSave || fadeLoad)
         { FadeSaveLoadText(); }
     }
-
-    #region Gameplay
-    public void SetPlayerObject(PlayerController player)
-    {
-        player.transform.parent = transform;
-        this.player = player;
-    }
-    public void SetObjectColor(GameObject gameObject, Color colour)
-    {
-        gameObject.GetComponent<MeshRenderer>().material.color = colour;
-    }
-    #endregion
 
     #region UI Input, Buttons
 
@@ -325,6 +303,11 @@ public class LevelManager : MonoBehaviour
     public void ScrollCredits()
     { 
         //if (GameManager.manager.gameState)
+    }
+
+    public void SetObjectColor(GameObject gameObject, Color colour)
+    {
+        gameObject.GetComponent<MeshRenderer>().material.color = colour;
     }
     #endregion
 

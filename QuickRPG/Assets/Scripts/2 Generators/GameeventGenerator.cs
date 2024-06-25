@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventGenerator : MonoBehaviour
+public class GameeventGenerator : MonoBehaviour
 {
     //create events
     //event's contain their own info and manage themselves within the gamemode once active,
@@ -11,5 +11,26 @@ public class EventGenerator : MonoBehaviour
     //
     void Start()
     {
+        //init
     }
+
+    public GameeventController[] CreateEvents(int amount)
+    {
+        GameEvents[] events = new GameEvents[amount];
+        GameeventController[] executableEvents = new GameeventController[amount];
+
+        // assign random events?
+
+        return executableEvents;
+    }
+
+    public GameeventController CreateEvent(GameEvents gameEvent)
+    {
+        GameeventController executableEvent = new(gameEvent);
+        Debug.Log($"Event Created {gameEvent.ToString()}");
+
+        return executableEvent;
+    }
+    
+    //dialog creation goes here
 }

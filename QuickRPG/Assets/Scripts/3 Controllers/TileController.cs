@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 public enum TILETYPE
 {
-    BASE
+    BASE,
+    EXP
 }
 
 public class TileController : MonoBehaviour
@@ -12,15 +13,19 @@ public class TileController : MonoBehaviour
     public GameObject activeTileObject;
     public GameObject basicTileObject;
 
-    [SerializeField] private bool UseActiveTile;
     [SerializeField] private BaseTile tile;
-    [SerializeField] public BaseTile Tile { get; set; }
+    [SerializeField] private bool UseActiveTile;
+
+    [SerializeField] private GameEvents tileEvent;
+    
+    public BaseTile Tile { get; set; }
+    public GameEvents TileEvent { get; set; }
 
     void Start()
     {
         if (UseActiveTile == false || activeTileObject == null) return;
 
-        SetTile(new BaseTile(basicTileObject, this));
+        //SetTile(new BaseTile(basicTileObject, this));
     }
 
     public TileController(TILETYPE tileType) 
@@ -82,6 +87,12 @@ public class TileController : MonoBehaviour
         //check if tile is in the right position otherwise throw error
         Tile = tile_;
     }
+
+    //tile event
+    //activation
+    // create event with new controller and set to activate
+    // if no events are loaded then skip, if events are one time use
+    // they will take their own event info and destroy it.
 }
 
 #region TileSet
@@ -108,12 +119,12 @@ public class BaseTile
         tileObject = Object.Instantiate(baseTile);
         tileController = tileObject.GetComponent<TileController>();
     }
-    public BaseTile(GameObject baseTile, TileController tController)
+    /*public BaseTile(GameObject baseTile, TileController tController)
     {
         tileObject = baseTile;
         tileController = tController;
         SetStandingPos();
-    }
+    }*/
 
     public void SetPosition(Vector3 setPosition)
     {
@@ -129,6 +140,15 @@ public class BaseTile
         //basic
         Bounds bounds = tileObject.GetComponent<MeshRenderer>().bounds;
         StandingPos = new Vector3(tileObject.transform.position.x, bounds.size.y / 2, tileObject.transform.position.z);
+    }
+}
+
+public class TileDemo : BaseTile
+{
+    public TileDemo(GameObject baseTile, GameEvents tileEvent) : base(baseTile)
+    {
+        tileController.TileEvent = tileEvent;
+
     }
 }
 # endregion

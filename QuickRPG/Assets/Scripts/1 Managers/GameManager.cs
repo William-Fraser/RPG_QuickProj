@@ -1,19 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+using System;
 // game manager
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEditor;
-using System;
 
 
 //anticipation, abstraction, adaptation
 
 public enum GameState
-{ 
+{
     MAINMENU,
     CONNECTSERVER,
     MATCHMAKING,
@@ -37,6 +33,7 @@ public class GameManager : MonoBehaviour
     public LevelManager levelManager;
     public UIManager uiManager;
     public GamemodeManager gamemodeManager;
+    public WorldManager worldManager;
 
     public GameState gameState;
 
@@ -236,7 +233,7 @@ public class GameManager : MonoBehaviour
             savedInfo.savedBrightness = levelManager.GetBrightnessSliderValue();
         }
         else
-        { 
+        {
             savedInfo.scene = SceneManager.GetActiveScene().buildIndex;
             savedInfo.activeScreen = levelManager.activeScreen;
             savedInfo.gameState = gameState;
@@ -270,7 +267,7 @@ public class GameManager : MonoBehaviour
             gameState = loadedInfo.gameState;
         }
 
-        levelManager.EnableSaveLoadText(GameState.LOAD); 
+        levelManager.EnableSaveLoadText(GameState.LOAD);
     }
 
     public void ResetScene()

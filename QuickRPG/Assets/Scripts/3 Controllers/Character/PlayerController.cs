@@ -39,13 +39,15 @@ public class PlayerController : CharController
         // recalculated 2 times so far
     {
         //debug
-        ray = cam.ScreenPointToRay(Input.mousePosition);
+
+        //look
+        /*ray = cam.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit))
         {
             if (hit.transform.gameObject )
                 if ( currentTile.TileObject.gameObject)
             FaceDir(hit.transform);
-        }
+        }*/
 
 
         base.Update();
@@ -143,7 +145,8 @@ public class PlayerController : CharController
 
         // colour settings are set for clientside performance
 
-        // ally, neutral and enemy movement is different colours only viewable from difficulty settings or spells,
+        // ally, neutral and enemy movemen
+        // t is different colours only viewable from difficulty settings or spells,
         // this might be changed to character controller for expandability
     }
 

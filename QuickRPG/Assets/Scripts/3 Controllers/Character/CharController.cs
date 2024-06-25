@@ -35,7 +35,9 @@ public abstract class CharController : MonoBehaviour
     protected STATE state;
     [SerializeField] protected Statistics stats;
 
-    #region character Effects
+    #region character Effects 
+    // maybe move to stats? and switch stats and the like
+    // to dictionaries or arrays of ints with enum quantifiers
 
     public bool affectWithEffects;
     private List<EFFECT> activeEffects;
@@ -71,9 +73,9 @@ public abstract class CharController : MonoBehaviour
         twistedDamage = 0;
         twistedTime = 0;
 
-        RaycastHit hit;
+        /*RaycastHit hit;
         Physics.Raycast(modelObject.transform.position, Vector3.down, out hit);
-        currentTile = hit.transform.gameObject.GetComponent<TileController>().Tile;
+        currentTile = hit.transform.gameObject.GetComponent<TileController>().Tile;*/
 
         //check for model postition, if not at local.zero send error.
         if (modelObject.transform.localPosition != Vector3.zero)
