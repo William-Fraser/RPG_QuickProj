@@ -13,16 +13,19 @@ public class WorldManager : MonoBehaviour
     //Generated Maps could be saved
 
     private WorldGenerator worldGenerator;
-
-    public GameObject StartingCharacter; //base character others are loaded over
-
+    private GameeventGenerator gameeventGenerator;
     public PlayerController player;
+    public GameObject StartingCharacter; //base character others are loaded over
 
 
     public void Awake()
     {
         // create a new root object for the world to generate in after generation the
         // world data should be saved so it can be loaded
+
+        worldGenerator = new WorldGenerator();
+        gameeventGenerator = new GameeventGenerator();
+
 
         // when generating the world be sure to update the tile data to include 
         // player spawning tiles based on how many are starting, for new players
@@ -38,5 +41,9 @@ public class WorldManager : MonoBehaviour
         player.transform.parent = transform;
         this.player = player;
     }
+}
+
+public class GameWorld : MonoBehaviour
+{ 
 
 }

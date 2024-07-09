@@ -58,7 +58,7 @@ public class EventsSwitchToTurnBased : GameEvents
 {
     public EventsSwitchToTurnBased()
     {
-        GameRules daRules = GameManager.manager.gamemodeManager.gameRules;
+        GameRules daRules = GameManager.manager.gamemodeManager.GameRules;
 
         daRules.FreeMoveActive(false);
         daRules.SwitchGamemode(GAMEMODE.TURNBASED);
@@ -71,7 +71,7 @@ public class EventsSwitchToAdventure : GameEvents
 {
     public EventsSwitchToAdventure()
     {
-        GameRules daRules = GameManager.manager.gamemodeManager.gameRules;
+        GameRules daRules = GameManager.manager.gamemodeManager.GameRules;
 
         daRules.FreeMoveActive(true);
         daRules.SwitchGamemode(GAMEMODE.ADVENTURE);

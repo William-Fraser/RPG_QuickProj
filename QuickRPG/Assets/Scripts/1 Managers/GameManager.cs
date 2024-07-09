@@ -5,7 +5,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 //anticipation, abstraction, adaptation
 
 public enum GameState
@@ -64,6 +63,9 @@ public class GameManager : MonoBehaviour
         }
 
         gameState = GameState.MAINMENU;
+
+        gamemodeManager = new();
+        worldManager = new();
     }
 
     private void Start()
@@ -212,6 +214,11 @@ public class GameManager : MonoBehaviour
     {
         gameState = targetState;
     }
+
+    //list to add to save load
+    // gamemode
+    // world 
+    // player
 
     public void Save(int path)
     {

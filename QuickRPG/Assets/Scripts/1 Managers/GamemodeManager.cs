@@ -13,9 +13,10 @@ public enum GAMEMODE
 
 public class GamemodeManager : MonoBehaviour
 {
-    public GameeventGenerator gameeventGenerator;
-    public GameeventController activeGameevent;
-    public GameRules gameRules;
+    private GameeventGenerator gameeventGenerator;
+    private GameRules gameRules;
+
+    public GameRules GameRules { get; }
 
     void Start()
     {
