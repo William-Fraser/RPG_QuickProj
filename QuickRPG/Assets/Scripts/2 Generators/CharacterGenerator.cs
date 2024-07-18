@@ -6,5 +6,6 @@ using UnityEngine.TestTools;
 public class CharGenerator : MonoBehaviour
 {
     // methods for generating characters
-    // start with nothing just the demo model
+    // returns full character game objects
+    // to start inst. demo model for use
 }

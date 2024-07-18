@@ -4,7 +4,7 @@ using System.Net.Security;
 using UnityEngine;
 
 // controls elements specific to this game session i.e:
-// player menus(often changing), npcs and some interactive behaviours
+// player's character menus(often changing), npcs and some interactive behaviours
 
 public class WorldManager : MonoBehaviour
 {
@@ -14,17 +14,19 @@ public class WorldManager : MonoBehaviour
 
     private WorldGenerator worldGenerator;
     private GameeventGenerator gameeventGenerator;
+    private GameWorld world;
+
     public PlayerController player;
     public GameObject StartingCharacter; //base character others are loaded over
 
 
     public void Awake()
     {
-        // create a new root object for the world to generate in after generation the
-        // world data should be saved so it can be loaded
-
         worldGenerator = new WorldGenerator();
         gameeventGenerator = new GameeventGenerator();
+        world = new GameWorld();
+
+        world
 
 
         // when generating the world be sure to update the tile data to include 

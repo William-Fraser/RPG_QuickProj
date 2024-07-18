@@ -13,8 +13,8 @@ public enum GAMEMODE
 
 public class GamemodeManager : MonoBehaviour
 {
-    private GameeventGenerator gameeventGenerator;
     private GameRules gameRules;
+    private GameeventGenerator gameeventGenerator;
 
     public GameRules GameRules { get; }
 

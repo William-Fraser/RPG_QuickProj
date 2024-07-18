@@ -155,7 +155,7 @@ public class PlayerController : CharController
         // could lead to all facets being pluggable features?
     {
         ///AdventureMovement
-        if (GameManager.manager.gamemodeManager.gameRules.FreeMove)
+        if (GameManager.manager.gamemodeManager.GameRules.FreeMove)
         { 
             if (Input.GetMouseButton(0))
             {
