@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -26,6 +27,7 @@ public class WorldGenerator : MonoBehaviour
     private List<Vector3> platformPlacements;
     private int platformPlacementLevel;
     private List<BaseTile> map;
+    private Queue<GameEvents> events;
 
     public int amountOfPlatforms;
     public int minSizeOfPlatforms;
@@ -39,16 +41,14 @@ public class WorldGenerator : MonoBehaviour
     //?
     #endregion
 
-    void Start()
+    public void GenerateMap(GameeventGenerator eventGen)
     {
         map = new List<BaseTile>();
         platformPlacements = new List<Vector3>();
 
-        GenerateMap();
-    }
-
-    public void GenerateMap()
-    {
+        //create random events for map
+        events = CreateEventQueue();
+        
         // add the amount of platforms to the map list
         for (int i = 0; i < amountOfPlatforms; i++)
         {
@@ -58,17 +58,37 @@ public class WorldGenerator : MonoBehaviour
             numberOfPlatforms++;
             platformPlacementLevel = 0;
 
-            newPlatform = CreatePlatformTiles();
+            newPlatform = CreatePlatformTiles(eventGen);
             platformPlacement = FindPlatformPlacement(newPlatform);
 
             ShapePlatform(newPlatform, platformPlacement);
 
             for (int j = 0; j < newPlatform.Length; j++)
                 map.Add(newPlatform[j]);
+
         }
+
+        //create pathways using amountOfBridges
+        //organize tiles into rows and collums with the most tiles, then
+        //create a 2 wide corridor along the biggest values and create
+        //random horizontal and vertical connections between the other platforms,
+        //mark a platform off when it gets a vertical or horizontal through it all
+        //platforms can only have 1 of each though it can go until it hits a platform
+        //which it cant use.
     }
 
-    private BaseTile[] CreatePlatformTiles()
+    private Queue<GameEvents> CreateEventQueue()
+    { 
+        Queue<GameEvents> queue = new Queue<GameEvents>();
+
+        //Based on difficulty and maybe stats and more things?
+        //for now it is basic
+        //amount of monsters based on the level itself
+
+        return queue;
+    }
+
+    private BaseTile[] CreatePlatformTiles(GameeventGenerator eventGen)
     {
         int size;
         BaseTile[] newPlatform;
@@ -81,7 +101,9 @@ public class WorldGenerator : MonoBehaviour
 
         for (int i = 0; i < size; i++)
         {
-            //add method to select tile type
+
+            if (amountOfPlatforms >= events.Count) break;
+
             newTile = controller.CreateTile(TILETYPE.BASE);
             Debug.Log($"new tile made: {newTile.TileObject.name}");
             newTile.TileObject.name = newTile.TileObject.name + $"{i}";

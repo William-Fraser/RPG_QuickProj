@@ -24,9 +24,7 @@ public class WorldManager : MonoBehaviour
     {
         worldGenerator = new WorldGenerator();
         gameeventGenerator = new GameeventGenerator();
-        world = new GameWorld();
-
-        world
+        world = new GameWorld(worldGenerator, gameeventGenerator);
 
 
         // when generating the world be sure to update the tile data to include 
@@ -46,6 +44,11 @@ public class WorldManager : MonoBehaviour
 }
 
 public class GameWorld : MonoBehaviour
-{ 
+{
+    List<BaseTile> map;
 
+    public GameWorld(WorldGenerator worlGen, GameeventGenerator eventGen)
+    { 
+        
+    }
 }
